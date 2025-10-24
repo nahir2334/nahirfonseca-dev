@@ -1,91 +1,842 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portafolio | Nahir Fonseca</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script defer src="js/main.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio de Nahir - Desarrolladora Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Variables CSS */
+        :root {
+            --primary-color: #6a0572; 
+            --secondary-color: #bb2d7a; 
+            --text-color: #333;
+            --light-text-color: #f4f4f4;
+            --background-color: #f9f9f9;
+            --card-background: #ffffff;
+            --border-color: #e0e0e0;
+            --form-bg: #f0f0f0;
+            --shadow: rgba(0, 0, 0, 0.08);
+            --transition-speed: 0.3s ease;
+        }
+
+        /* Modo Oscuro */
+        body.dark-mode {
+            --text-color: #f4f4f4;
+            --light-text-color: #222;
+            --background-color: #222;
+            --card-background: #333;
+            --border-color: #444;
+            --form-bg: #444;
+            --shadow: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Estilos Generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background var(--transition-speed);
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Encabezado y Navegación */
+        header {
+            background: var(--card-background);
+            box-shadow: 0 2px 10px var(--shadow);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            font-weight: 600;
+            color: var(--text-color);
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            left: 0;
+            bottom: -5px;
+            transition: width var(--transition-speed);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Botón de Modo Oscuro */
+        .dark-mode-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5em;
+            cursor: pointer;
+            margin-left: 20px;
+            transition: color var(--transition-speed);
+        }
+        
+        .dark-mode-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        #hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            text-align: center;
+            background: linear-gradient(135deg, var(--background-color), var(--card-background));
+            padding: 80px 0;
+            flex-direction: column;
+            transition: background var(--transition-speed);
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 30px;
+            border: 6px solid var(--primary-color);
+            box-shadow: 0 0 0 8px var(--secondary-color);
+        }
+
+        #hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        #hero h1 span {
+            color: var(--secondary-color);
+        }
+
+        #hero p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            color: var(--text-color);
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+
+        /* Secciones Generales */
+        section {
+            padding: 80px 0;
+            opacity: 0; /* Para la animación de entrada */
+            transform: translateY(20px); /* Para la animación de entrada */
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section:nth-of-type(odd) {
+            background-color: var(--background-color);
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--card-background);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8em;
+            margin-bottom: 60px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            color: var(--primary-color);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Sección de Habilidades */
+        #skills .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .skill-item {
+            background: var(--card-background);
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            border: 1px solid var(--border-color);
+        }
+
+        .skill-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .skill-item i {
+            font-size: 3.5em;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            transition: color var(--transition-speed);
+        }
+        
+        .skill-item:hover i {
+            color: var(--secondary-color);
+        }
+
+        .skill-item h3 {
+            font-size: 1.2em;
+            margin-bottom: 0;
+            color: var(--text-color);
+        }
+
+        /* Sección de Proyectos */
+        #projects .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .project-card {
+            background: var(--card-background);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px var(--shadow);
+            overflow: hidden;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-info h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .project-info p {
+            font-size: 0.95em;
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        .project-info .btn {
+            width: 100%;
+        }
+
+        /* Sección de Contacto */
+        #contact .contact-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            justify-content: center;
+        }
+
+        #contact .contact-info {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: var(--text-color);
+        }
+
+        .contact-item i {
+            font-size: 1.5em;
+            color: var(--secondary-color);
+            margin-right: 15px;
+            width: 30px;
+            text-align: center;
+        }
+
+        .contact-item a {
+            color: var(--text-color);
+        }
+        .contact-item a:hover {
+            color: var(--primary-color);
+        }
+
+        #contact .contact-form {
+            flex: 2;
+            min-width: 300px;
+            background: var(--form-bg);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-form h3 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1em;
+            background-color: var(--card-background);
+            color: var(--text-color);
+            transition: border-color var(--transition-speed), background-color var(--transition-speed);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(106, 5, 114, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group .error-message {
+            color: #d9534f; /* Rojo para errores */
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: var(--light-text-color);
+            text-align: center;
+            padding: 30px 0;
+            font-size: 0.9em;
+        }
+
+        /* Animaciones */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none; /* Ocultar menú en móvil */
+            }
+
+            .logo {
+                font-size: 1.5em;
+            }
+
+            #hero h1 {
+                font-size: 2.5em;
+            }
+
+            #hero p {
+                font-size: 1.1em;
+            }
+
+            .hero-img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+
+            #skills .skills-grid,
+            #projects .projects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+
+            .skill-item {
+                padding: 20px 10px;
+            }
+            .skill-item i {
+                font-size: 2.8em;
+            }
+
+            .project-card img {
+                height: 180px;
+            }
+
+            #contact .contact-content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #contact .contact-form,
+            #contact .contact-info {
+                width: 100%;
+                max-width: 450px; /* Limitar ancho en móvil */
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            header .container {
+                flex-direction: column;
+            }
+
+            .dark-mode-toggle {
+                margin-top: 10px;
+                margin-left: 0;
+            }
+
+            #hero h1 {
+                font-size: 2em;
+            }
+
+            #hero p {
+                font-size: 1em;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+
+            .section-title {
+                font-size: 1.8em;
+            }
+        }
+    </style>
 </head>
 <body>
-  
-  <header class="header">
-    <nav class="navbar">
-      <h1 class="logo">Nahir<span>Fonseca</span></h1>
-      <ul class="nav-links">
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#sobre-mi">Sobre mí</a></li>
-        <li><a href="#habilidades">Habilidades</a></li>
-        <li><a href="#proyectos">Proyectos</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-      </ul>
-    </nav>
-  </header>
+    <!-- Encabezado / Navegación -->
+    <header>
+        <div class="container">
+            <h2 class="logo">Nahir.dev</h2>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Inicio</a></li>
+                    <li><a href="#skills">Habilidades</a></li>
+                    <li><a href="#projects">Proyectos</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </nav>
+            <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
 
-  <section id="inicio" class="inicio">
-    <div class="intro-texto">
-      <h2>Hola, soy <span>Nahir Fonseca</span></h2>
-      <p>Desarrolladora web apasionada por crear soluciones creativas y funcionales.</p>
-      <div class="botones">
-        <a href="#proyectos" class="btn">Ver proyectos</a>
-        <a href="#contacto" class="btn btn-secundario">Contáctame</a>
-      </div>
-    </div>
-    <img src="images/foto_perfil.jpg" alt="Foto de Nahir" class="perfil-img">
-  </section>
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-content">
+            <img src="https://via.placeholder.com/200/6a0572/FFFFFF?text=Nahir" alt="Foto de Nahir" class="hero-img">
+            <h1>Hola, soy <span>Nahir</span></h1>
+            <p>Soy desarrolladora web especializada en crear experiencias digitales atractivas y funcionales. Me encanta transformar ideas en soluciones interactivas.</p>
+            <a href="#contact" class="btn">Contáctame</a>
+        </div>
+    </section>
 
-  <section id="sobre-mi" class="sobre-mi">
-    <h2>Sobre mí</h2>
-    <p>
-      Soy una desarrolladora web con experiencia en HTML, CSS, JavaScript, PHP, Django y MySQL.
-      Me encanta aprender nuevas tecnologías y aplicar mis conocimientos para crear proyectos funcionales y con estilo.
-    </p>
-  </section>
+    <!-- Sección de Habilidades (Skills) -->
+    <section id="skills" class="fade-in">
+        <div class="container">
+            <h2 class="section-title">Mis Habilidades</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <i class="fab fa-html5"></i>
+                    <h3>HTML5</h3>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-css3-alt"></i>
+                    <h3>CSS3</h3>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-js"></i>
+                    <h3>JavaScript</h3>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-react"></i>
+                    <h3>React</h3>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-node-js"></i>
+                    <h3>Node.js</h3>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-git-alt"></i>
+                    <h3>Git</h3>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-database"></i>
+                    <h3>SQL/NoSQL</h3>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-server"></i>
+                    <h3>REST APIs</h3>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <section id="habilidades" class="habilidades">
-    <h2>Habilidades</h2>
-    <div class="skills-grid">
-      <div class="skill">HTML</div>
-      <div class="skill">CSS</div>
-      <div class="skill">JavaScript</div>
-      <div class="skill">PHP</div>
-      <div class="skill">Django</div>
-      <div class="skill">MySQL</div>
-    </div>
-  </section>
+    <!-- Sección de Proyectos -->
+    <section id="projects" class="fade-in">
+        <div class="container">
+            <h2 class="section-title">Mis Proyectos Destacados</h2>
+            <div class="projects-grid">
+                <!-- Proyecto 1 -->
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/400x220/6a0572/FFFFFF?text=Proyecto+1" alt="Imagen del Proyecto 1">
+                    <div class="project-info">
+                        <h3>E-commerce Restaurante</h3>
+                        <p>Desarrollo de una plataforma para un restaurante completa con gestión de productos, carrito de compras y pasarela de pagos.</p>
+                        <a href="#" class="btn" target="_blank">Ver Proyecto</a>
+                    </div>
+                </div>
+                <!-- Proyecto 2 -->
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/400x220/bb2d7a/FFFFFF?text=Proyecto+2" alt="Imagen del Proyecto 2">
+                    <div class="project-info">
+                        <h3>Echolinks</h3>
+                        <p>Una aplicación web que mejorara la  comunicacion entre empleadores y empleados, ademas viene implementada con una ia para calificar CV.</p>
+                        <a href="#" class="btn" target="_blank">Ver Proyecto</a>
+                    </div>
+                </div>
+                <!-- Proyecto 3 -->
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/400x220/6a0572/FFFFFF?text=Proyecto+3" alt="Imagen del Proyecto 3">
+                    <div class="project-info">
+                        <h3>Gestor de Tareas Frontend</h3>
+                        <p>Un gestor de tareas interactivo y responsive, desarrollado completamente en el lado del cliente con JavaScript puro.</p>
+                        <a href="#" class="btn" target="_blank">Ver Proyecto</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <section id="proyectos" class="proyectos">
-    <h2>Proyectos</h2>
-    <div class="proyectos-grid">
-      <div class="proyecto-card">
-        <h3>Echolinks</h3>
-        <p>Aplicación web de gestión de RRHH desarrollada con PHP y MySQL.</p>
-        <a href="#" class="btn">Ver en GitHub</a>
-      </div>
-      <div class="proyecto-card">
-        <h3>Portafolio Personal</h3>
-        <p>Sitio web profesional hecho con HTML, CSS y JavaScript.</p>
-        <a href="#" class="btn">Ver en GitHub</a>
-      </div>
-    </div>
-  </section>
+    <!-- Sección de Contacto -->
+    <section id="contact" class="fade-in">
+        <div class="container">
+            <h2 class="section-title">Contáctame</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Información de Contacto</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p><a href="mailto:tu.correo@example.com">nahirf2895@gmail.com</a></p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <p><a href="https://www.linkedin.com/in/nahir" target="_blank">LinkedIn/Nahir</a></p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <p><a href="https://github.com/nahir2334" target="_blank">GitHub/nahir2334</a></p>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Envíame un mensaje</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nombre:</label>
+                            <input type="text" id="name" name="name" required>
+                            <p class="error-message" id="nameError"></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                            <p class="error-message" id="emailError"></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje:</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                            <p class="error-message" id="messageError"></p>
+                        </div>
+                        <button type="submit" class="btn">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <section id="contacto" class="contacto">
-    <h2>Contacto</h2>
-    <form class="contacto-form">
-      <input type="text" placeholder="Tu nombre" required>
-      <input type="email" placeholder="Tu correo" required>
-      <textarea placeholder="Tu mensaje" rows="4" required></textarea>
-      <button type="submit" class="btn">Enviar mensaje</button>
-    </form>
-  </section>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Nahir. Todos los derechos reservados.</p>
+            <p>Diseñado con <i class="fas fa-heart"></i> por Nahir.</p>
+        </div>
+    </footer>
 
-  <footer class="footer">
-    <p>© 2025 Nahir Fonseca | Desarrolladora Web</p>
-    <div class="social-links">
-      <a href="https://github.com/" target="_blank">GitHub</a>
-      <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
-    </div>
-  </footer>
+    <script>
+        // JavaScript para animar el scroll, validación de formulario y modo oscuro
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animación de Scroll Suave
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Animación de entrada de secciones al hacer scroll (Fade-in)
+            const faders = document.querySelectorAll('.fade-in');
+            const appearOptions = {
+                threshold: 0.1, // La sección se considera visible cuando el 10% de ella está en el viewport
+                rootMargin: "0px 0px -50px 0px" // Empezar a animar 50px antes de llegar al final de la sección
+            };
+
+            const appearOnScroll = new IntersectionObserver(function (entries, appearOnScroll) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add('active');
+                        appearOnScroll.unobserve(entry.target);
+                    }
+                });
+            }, appearOptions);
+
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+
+            // Validación del Formulario de Contacto
+            const contactForm = document.getElementById('contactForm');
+            contactForm.addEventListener('submit', function (e) {
+                e.preventDefault(); // Evitar el envío por defecto del formulario
+                let isValid = true;
+
+                // Validar Nombre
+                const nameInput = document.getElementById('name');
+                const nameError = document.getElementById('nameError');
+                if (nameInput.value.trim() === '') {
+                    nameError.textContent = 'El nombre es obligatorio.';
+                    nameError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    nameError.style.display = 'none';
+                }
+
+                // Validar Email
+                const emailInput = document.getElementById('email');
+                const emailError = document.getElementById('emailError');
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (emailInput.value.trim() === '') {
+                    emailError.textContent = 'El email es obligatorio.';
+                    emailError.style.display = 'block';
+                    isValid = false;
+                } else if (!emailPattern.test(emailInput.value)) {
+                    emailError.textContent = 'Por favor, introduce un email válido.';
+                    emailError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    emailError.style.display = 'none';
+                }
+
+                // Validar Mensaje
+                const messageInput = document.getElementById('message');
+                const messageError = document.getElementById('messageError');
+                if (messageInput.value.trim() === '') {
+                    messageError.textContent = 'El mensaje es obligatorio.';
+                    messageError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    messageError.style.display = 'none';
+                }
+
+                if (isValid) {
+                    alert('¡Mensaje enviado con éxito! (En un entorno real, aquí se enviaría a un servidor)');
+                    contactForm.reset(); // Limpiar formulario
+                }
+            });
+
+            // Modo Oscuro
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+
+            // Cargar la preferencia del usuario o del sistema
+            const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const storedTheme = localStorage.getItem('theme');
+
+            if (storedTheme === 'dark' || (storedTheme === null && prefersDarkMode)) {
+                body.classList.add('dark-mode');
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark');
+                    darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
